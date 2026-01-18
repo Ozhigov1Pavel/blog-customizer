@@ -1,31 +1,61 @@
 import { createRoot } from 'react-dom/client';
-import { StrictMode, CSSProperties } from 'react';
+import { StrictMode, CSSProperties, useState } from 'react';
 import clsx from 'clsx';
 
 import { Article } from './components/article/Article';
-import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
-import { defaultArticleState } from './constants/articleProps';
+import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm'; // Компонент для редактирования параметров
+import { defaultArticleState } from './constants/articleProps'; // Дефолтные значения для статьи
 
-import './styles/index.scss';
-import styles from './styles/index.module.scss';
+import './styles/index.scss'; // Импорт стилей
+import styles from './styles/index.module.scss'; // Импорт стилей
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
+	// Состояние для хранения настроек
+	const [settings, setSettings] = useState({
+		fontFamily: defaultArticleState.fontFamilyOption.value,
+		fontSize: defaultArticleState.fontSizeOption.value,
+		fontColor: defaultArticleState.fontColor.value,
+		bgColor: defaultArticleState.backgroundColor.value,
+		contentWidth: defaultArticleState.contentWidth.value,
+	});
+
+	// Обработчик для применения настроек из формы
+	const handleApplySettings = (newSettings: any) => {
+		setSettings(newSettings); // Обновляем состояние
+	};
+
+	// Обработчик для сброса настроек
+	const handleResetSettings = () => {
+		setSettings({
+			fontFamily: defaultArticleState.fontFamilyOption.value,
+			fontSize: defaultArticleState.fontSizeOption.value,
+			fontColor: defaultArticleState.fontColor.value,
+			bgColor: defaultArticleState.backgroundColor.value,
+			contentWidth: defaultArticleState.contentWidth.value,
+		});
+	};
+
 	return (
 		<main
 			className={clsx(styles.main)}
 			style={
 				{
-					'--font-family': defaultArticleState.fontFamilyOption.value,
-					'--font-size': defaultArticleState.fontSizeOption.value,
-					'--font-color': defaultArticleState.fontColor.value,
-					'--container-width': defaultArticleState.contentWidth.value,
-					'--bg-color': defaultArticleState.backgroundColor.value,
+					'--font-family': settings.fontFamily,
+					'--font-size': settings.fontSize,
+					'--font-color': settings.fontColor,
+					'--bg-color': settings.bgColor,
+					'--container-width': settings.contentWidth,
 				} as CSSProperties
 			}>
-			<ArticleParamsForm />
+			{/* Передаем функции для применения и сброса настроек в ArticleParamsForm */}
+			<ArticleParamsForm
+				currentSettings={settings}
+				onApply={handleApplySettings}
+				onReset={handleResetSettings}
+			/>
 			<Article />
 		</main>
 	);
