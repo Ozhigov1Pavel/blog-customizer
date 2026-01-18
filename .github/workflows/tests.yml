@@ -22,7 +22,9 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          npx playwright install
+          npx playwright install --force   # Принудительная установка всех браузеров
+          npx playwright install chromium  # Явная установка Chromium
+          npx playwright --version         # Проверка установленной версии Playwright
       - name: Run tests
         run: bash /tmp/tests-blog-customizer/run.sh
       - uses: actions/upload-artifact@v4
