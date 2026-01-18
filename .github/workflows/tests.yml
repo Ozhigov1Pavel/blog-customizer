@@ -19,12 +19,11 @@ jobs:
         run: exit 1
       - name: Get testing lib
         run: set -eu && git clone https://github.com/Yandex-Practicum/tests-blog-customizer.git /tmp/tests-blog-customizer
-      - name: Install dependencies
+      - name: Install Playwright and Browsers
         run: |
           npm ci
-          npx playwright install --force   # Принудительная установка всех браузеров
-          npx playwright install chromium  # Явная установка Chromium
-          npx playwright --version         # Проверка установленной версии Playwright
+          npx playwright install --force
+          npx playwright install chromium
       - name: Run tests
         run: bash /tmp/tests-blog-customizer/run.sh
       - uses: actions/upload-artifact@v4
