@@ -15,22 +15,16 @@ export type OptionType = {
 	optionClassName?: string;
 };
 
-export const fontFamilyOptions: OptionType[] & {
-	optionClassName?: FontFamiliesClasses;
-} = [
-	{ title: 'Open Sans', value: 'Open Sans', className: fontFamilyClasses[0] },
-	{ title: 'Ubuntu', value: 'Ubuntu', className: fontFamilyClasses[1] },
+export const fontFamilyOptions: OptionType[] = [
+	{ title: 'Open Sans', value: 'Open Sans', className: 'open-sans' },
+	{ title: 'Ubuntu', value: 'Ubuntu', className: 'ubuntu' },
 	{
 		title: 'Cormorant Garamond',
 		value: 'Cormorant Garamond',
-		className: fontFamilyClasses[2],
+		className: 'cormorant-garamond',
 	},
-	{ title: 'Days One', value: 'Days One', className: fontFamilyClasses[3] },
-	{
-		title: 'Merriweather',
-		value: 'Merriweather',
-		className: fontFamilyClasses[4],
-	},
+	{ title: 'Days One', value: 'Days One', className: 'days-one' },
+	{ title: 'Merriweather', value: 'Merriweather', className: 'merriweather' },
 ];
 
 export const fontColors: OptionType[] = [

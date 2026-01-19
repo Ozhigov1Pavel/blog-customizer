@@ -205,3 +205,68 @@
 	@include option-width-before;
 	background-image: url('../../images/narrow.svg');
 }
+
+/* Placeholder styles for color icons */
+
+.placeholder.option-black::before {
+	@include option-color-before;
+	background-color: #000000;
+}
+
+.placeholder.option-white::before {
+	@include option-color-before;
+	box-sizing: border-box;
+	background-color: #ffffff;
+	border: 1px solid #000000;
+}
+
+.placeholder.option-gray::before {
+	@include option-color-before;
+	background-color: #c4c4c4;
+}
+
+.placeholder.option-pink::before {
+	@include option-color-before;
+	background-color: #feafe8;
+}
+
+.placeholder.option-fuchsia::before {
+	@include option-color-before;
+	background-color: #fd24af;
+}
+
+.placeholder.option-yellow::before {
+	@include option-color-before;
+	background-color: #ffc802;
+}
+
+.placeholder.option-green::before {
+	@include option-color-before;
+	background-color: #80d994;
+}
+
+.placeholder.option-blue::before {
+	@include option-color-before;
+	background-color: #6fc1fd;
+}
+
+.placeholder.option-purple::before {
+	@include option-color-before;
+	background-color: #5f0dee;
+}
+
+/* Placeholder styles for width icons */
+
+.placeholder.option-wide::before {
+	@include option-width-before;
+	background-image: url('../../images/wide.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.placeholder.option-narrow::before {
+	@include option-width-before;
+	background-image: url('../../images/narrow.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+}
