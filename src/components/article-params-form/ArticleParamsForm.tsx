@@ -31,7 +31,7 @@ export const ArticleParamsForm = ({
 	onApply,
 	onReset,
 }: ArticleParamsFormProps) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [font, setFont] = useState(currentSettings.fontFamily);
 	const [fontSize, setFontSize] = useState(currentSettings.fontSize);
 	const [fontColor, setFontColor] = useState(currentSettings.fontColor);
@@ -42,11 +42,11 @@ export const ArticleParamsForm = ({
 	const sidebarRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLDivElement>(null);
 
-	const toggleSidebar = () => setIsOpen((prevState) => !prevState);
+	const toggleSidebar = () => setIsMenuOpen((prevState) => !prevState);
 
 	// Синхронизация состояния формы с текущими настройками при открытии сайдбара
 	useEffect(() => {
-		if (isOpen) {
+		if (isMenuOpen) {
 			setFont(currentSettings.fontFamily);
 			setFontSize(currentSettings.fontSize);
 			setFontColor(currentSettings.fontColor);
@@ -54,11 +54,11 @@ export const ArticleParamsForm = ({
 			setContentWidth(currentSettings.contentWidth);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isOpen]);
+	}, [isMenuOpen]);
 
 	// Закрытие при клике вне сайдбара (исключая кнопку со стрелкой)
 	useEffect(() => {
-		if (!isOpen) return;
+		if (!isMenuOpen) return;
 
 		const handleClick = (event: MouseEvent) => {
 			const target = event.target;
@@ -67,7 +67,7 @@ export const ArticleParamsForm = ({
 				!sidebarRef.current?.contains(target) &&
 				!buttonRef.current?.contains(target)
 			) {
-				setIsOpen(false);
+				setIsMenuOpen(false);
 			}
 		};
 
@@ -75,7 +75,7 @@ export const ArticleParamsForm = ({
 		return () => {
 			window.removeEventListener('mousedown', handleClick);
 		};
-	}, [isOpen]);
+	}, [isMenuOpen]);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -104,12 +104,12 @@ export const ArticleParamsForm = ({
 	return (
 		<>
 			<div ref={buttonRef}>
-				<ArrowButton isOpen={isOpen} onClick={toggleSidebar} />
+				<ArrowButton isOpen={isMenuOpen} onClick={toggleSidebar} />
 			</div>
 			<div ref={sidebarRef}>
 				<aside
 					className={`${styles.container} ${
-						isOpen ? styles.container_open : ''
+						isMenuOpen ? styles.container_open : ''
 					}`}>
 					<form className={styles.form} onSubmit={handleSubmit}>
 						<div className={styles.title}>
